@@ -1,0 +1,36 @@
+pipeline {
+   agent any
+   
+   stages {
+      stage('Clone') {
+          steps {
+            git 'https://github.com/Deevian/mock-blog.git'
+          }
+        
+      }
+
+      stage('Install Dependencies') {
+          steps {
+            sh "npm i"
+          }   
+      }
+
+      stage('Build') {
+          steps {
+            sh "npm run build"
+          }
+      }
+
+      stage('Clean Deployment') {
+          steps {
+            sh "rm -rf /var/www/blog/*"
+          } 
+      }
+
+      stage('Deploy') {
+          steps {
+            sh "cp -rp ./public/* /var/www/blog/"
+          }
+      }
+   }
+}

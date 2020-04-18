@@ -1,0 +1,11 @@
+server {
+    server_name lounge.sh;
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    location / {
+        root 	/var/www/blog;
+        index	index.htm index.html;
+    }
+}
